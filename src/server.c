@@ -1,5 +1,6 @@
 // vim: sw=4 ts=4 et :
 #include "server.h"
+#include "npc.h"
 
 connection_t *first_connection;
 connection_t *last_connection;
@@ -333,8 +334,28 @@ void* process_client(connection_t *connection) {
                     for (size_t i = 0; i < players_len; i++) {
                         s_send_players_full(players + i);
                     }
-                    break;
+
+                    // TODO: Implement proper 'finally' here
+                    goto chat_out;
                 }
+
+                if (strstr(payload, "!spawn\n") != NULL) {
+                    npc_t spawned = {
+                        .id = 0,
+                        .tile = S_TRAP,
+                        .color = D_WHITE,
+                        .x = 50,
+                        .y = 50
+                    };
+
+                    for (connection_t *curr = first_connection; curr;
+                            curr = curr->next) {
+                        s_send_npc(curr, &spawned);
+                    }
+
+                    goto chat_out;
+                }
+
                 s_chat_add(&schat, payload);
                 size = strlen(payload) + 1;
 
@@ -355,6 +376,7 @@ void* process_client(connection_t *connection) {
                             "New message in your chat!\n");
                 }
 
+chat_out:
                 free(payload);
 
                 break;
