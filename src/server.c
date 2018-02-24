@@ -1,6 +1,8 @@
 // vim: sw=4 ts=4 et :
 #include "server.h"
+
 #include "npc.h"
+#include "npc_traits.h"
 
 connection_t *first_connection;
 connection_t *last_connection;
@@ -335,23 +337,27 @@ void* process_client(connection_t *connection) {
                         s_send_players_full(players + i);
                     }
 
-                    // TODO: Implement proper 'finally' here
                     goto chat_out;
                 }
 
                 if (strstr(payload, "!spawn\n") != NULL) {
+                    trait_square_movement_ctx_t * spawned_ctx =
+                        (trait_square_movement_ctx_t *) calloc(sizeof(trait_square_movement_ctx_t), 1);
+                    spawned_ctx->side = 10;
+
                     npc_t spawned = {
-                        .id = 0,
+                        .id = npcs_len,
+
                         .tile = S_TRAP,
                         .color = D_WHITE,
-                        .x = 50,
-                        .y = 50
-                    };
 
-                    for (connection_t *curr = first_connection; curr;
-                            curr = curr->next) {
-                        s_send_npc(curr, &spawned);
-                    }
+                        .x = 50,
+                        .y = 50,
+
+                        .trait_ctx = spawned_ctx,
+                        .trait = npc_trait_square_movement
+                    };
+                    npcs[npcs_len++] = spawned;
 
                     goto chat_out;
                 }

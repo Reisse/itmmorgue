@@ -7,7 +7,7 @@
 
 struct npc;
 
-typedef void (*npc_event_handler_t)(struct npc * npc, void * ctx);
+typedef void (*npc_trait_t)(struct npc * npc, void * ctx);
 
 typedef struct npc {
     uint32_t id;
@@ -20,7 +20,8 @@ typedef struct npc {
 
     /* npc stats (hp, mp, atk, def, (de)buffs, speed...) */
 
-    npc_event_handler_t event_handler;
+    void * trait_ctx;
+    npc_trait_t trait;
 } npc_t;
 
 /* currently, the only difference between partial and full
