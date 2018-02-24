@@ -10,7 +10,7 @@ typedef struct trait_square_movement_ctx {
         DOWN,
         LEFT
     } direction;
-    size_t side, moved;
+    size_t distance, progress;
 } trait_square_movement_ctx_t;
 
 void npc_trait_square_movement(npc_t * npc, void * ctx);
