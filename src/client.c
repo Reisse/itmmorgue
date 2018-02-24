@@ -122,7 +122,7 @@ void* worker() {
                 continue;
         }
 
-        char *payload;
+        char *payload = NULL;
 
         if (mbuf.msg.size > 0) {
             payload = malloc(mbuf.msg.size);

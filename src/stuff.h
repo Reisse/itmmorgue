@@ -2,6 +2,8 @@
 #ifndef STUFF_H
 #define STUFF_H
 
+#include <curses.h>
+
 enum stuff {
     S_NONE            ,
     S_FLOOR           ,

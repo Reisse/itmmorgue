@@ -1,6 +1,5 @@
 #include "npc.h"
 
-#include "itmmorgue.h"
 #include "protocol.h"
 
 npc_t npcs[2048];
