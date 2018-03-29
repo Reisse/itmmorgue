@@ -8,8 +8,6 @@
 
 #define MQUEUE_SIZE 128
 
-#include <stdlib.h>
-
 /*
  * Describes message, sent to client. Message has its *type* (s2c and c2s
  * stands as "server to client" and "client to server" message type). *version*

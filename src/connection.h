@@ -2,13 +2,6 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 
-#include "protocol.h"
-
-#include <netinet/in.h>
-#include <pthread.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-
 /*
  * Represents client's connection to server.
  */

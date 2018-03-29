@@ -1,7 +1,5 @@
 #include "npc.h"
 
-#include "protocol.h"
-
 npc_t npcs[2048];
 size_t npcs_len = 0;
 

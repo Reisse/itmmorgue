@@ -1,9 +1,7 @@
 #ifndef NPC_H
 #define NPC_H
 
-#include "connection.h"
 #include "itmmorgue.h"
-#include "stuff.h"
 
 struct npc;
 
